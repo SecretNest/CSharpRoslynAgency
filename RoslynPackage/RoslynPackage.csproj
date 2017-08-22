@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net46;netstandard2.0</TargetFrameworks>
+    <PackageId>SecretNest.CSharpRoslynAgency</PackageId>
+    <RootNamespace>SecretNest.RoslynAgency</RootNamespace>
+    <AssemblyName>RoslynAgency</AssemblyName>
+    <Authors>Allen Cui</Authors>
+    <Company>SecretNest.info</Company>
+    <Product>RoslynAgency</Product>
+    <Description>An encapsulated package for building assembly using Roslyn and C#.
+NetStandard 2 and NetFX 4.6 are supported.</Description>
+    <Copyright>Allen Cui</Copyright>
+    <PackageLicenseUrl>https://github.com/scegg/CSharpRoslynAgency/blob/master/MIT.LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/scegg/CSharpRoslynAgency/</PackageProjectUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net46'">
+    <DefineConstants>netfx</DefineConstants>
+    <AssemblySearchPaths>$(AssemblySearchPaths);{GAC}</AssemblySearchPaths>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+    <DefineConstants>netstd</DefineConstants>
+  </PropertyGroup>
+      
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="2.3.1" />
+  </ItemGroup>
+
+</Project>
