@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net46;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net46</TargetFrameworks>
     <PackageId>SecretNest.CSharpRoslynAgency</PackageId>
     <RootNamespace>SecretNest.RoslynAgency</RootNamespace>
     <AssemblyName>RoslynAgency</AssemblyName>
@@ -18,13 +18,13 @@ NetStandard 2 and NetFX 4.6 are supported.</Description>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)' == 'net46'">
-    <DefineConstants>netfx</DefineConstants>
+    <!--<DefineConstants>netfx</DefineConstants>-->
     <AssemblySearchPaths>$(AssemblySearchPaths);{GAC}</AssemblySearchPaths>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+  <!--<PropertyGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
     <DefineConstants>netstd</DefineConstants>
-  </PropertyGroup>
+  </PropertyGroup>-->
       
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="2.3.1" />
