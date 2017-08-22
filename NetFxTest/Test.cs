@@ -108,22 +108,22 @@ namespace UserCode
         private void Builder_MissingAssemblyResolving(object sender, MissingAssemblyResolvingEventArgs e)
         {
             var fullName = e.AssemblyName.FullName;
-            Console.Write("Request from MissingAssemblyResolving: " + fullName);
+            Console.WriteLine("Request from MissingAssemblyResolving: " + fullName);
             byte[] result;
             if (platformAssembliesFullName.TryGetValue(fullName, out var value))
             {
                 result = value.Value;
-                Console.WriteLine(" Matched with full name.");
+                Console.WriteLine("Matched with full name: " + fullName);
             }
             else if (platformAssembliesName.TryGetValue(e.AssemblyName.Name, out value))
             {
                 result = value.Value;
-                Console.WriteLine(" Matched with name.");
+                Console.WriteLine("Matched with name: " + fullName);
             }
             else
             {
                 result = null;
-                Console.WriteLine(" Not resolved.");
+                Console.WriteLine("Not resolved: " + fullName);
             }
             e.MissingAssemblyImage = result;
         }
