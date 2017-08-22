@@ -72,7 +72,6 @@ namespace UserCode
         {
             List<AssemblyReference> references = new List<AssemblyReference>();
             AssemblyName assemblyNameCSharp = new AssemblyName("Microsoft.CSharp, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a");
-            Assembly assemblyCSharp = Assembly.Load(assemblyNameCSharp);
             references.Add(new AssemblyReference(assemblyNameCSharp));
             references.Add(new AssemblyReference(typeof(Implant.Implant<>).Assembly.GetName()));
             references.Add(new AssemblyReference(new AssemblyName(platformAssembliesFullName.FirstOrDefault(i => i.Key.StartsWith("mscorlib,")).Key)));
