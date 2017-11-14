@@ -64,7 +64,7 @@ namespace SecretNest.CSharpRoslynAgency
         //    return true;
         //}
 
-        PortableExecutableReference GetFromEvent(EventHandler<MissingAssemblyResolvingEventArgs> handler, string display, AssemblyReference assemblyReference)
+        PortableExecutableReference GetFromEvent(EventHandler<MissingAssemblyResolvingEventArgs> handler, string display, string fullName, AssemblyReference assemblyReference)
         {
             if (handler != null)
             {
@@ -73,11 +73,10 @@ namespace SecretNest.CSharpRoslynAgency
                 if (e.MissingAssemblyImage != null)
                 {
                     var result = assemblyReference.BuildPortableExecutableReference(e.MissingAssemblyImage);
-                    var fullName = assemblyReference.Name.FullName;
 #if DEBUG
                     Console.WriteLine("Got Assembly: " + fullName);
 #endif
-                    metadataReferenceCache.AddOrUpdate(fullName, result, (i, j) => result);
+                    metadataReferenceCache[fullName] = result;
                     return result;
                 }
             }
@@ -86,24 +85,34 @@ namespace SecretNest.CSharpRoslynAgency
 
         PortableExecutableReference GetMissingAssembly(string display, AssemblyReference assemblyReference)
         {
-            var beforeCache = GetFromEvent(MissingAssemblyResolvingBeforeCache, display, assemblyReference);
+            string fullName = assemblyReference.Name.FullName;
+
+            var beforeCache = GetFromEvent(MissingAssemblyResolvingBeforeCache, display, fullName, assemblyReference);
             if (beforeCache != null)
             {
                 return beforeCache;
             }
 
-            if (metadataReferenceCache.TryGetValue(assemblyReference.Name.FullName, out var match))
+            if (metadataReferenceCache.TryGetValue(fullName, out var match))
             {
 #if DEBUG
-                Console.WriteLine("Got Assembly From Cache: " + assemblyReference.Name.FullName);
+                Console.WriteLine("Got Assembly From Cache: " + fullName);
 #endif
                 return match;
             }
 
-            return GetFromEvent(MissingAssemblyResolving, display, assemblyReference);
+            if (assemblyImageCache.TryGetValue(fullName, out var image))
+            {
+                var result = assemblyReference.BuildPortableExecutableReference(image);
+                metadataReferenceCache[fullName] = result;
+                return result;
+            }
+
+            return GetFromEvent(MissingAssemblyResolving, display, fullName, assemblyReference);
         }
 
         ConcurrentDictionary<string, PortableExecutableReference> metadataReferenceCache = new ConcurrentDictionary<string, PortableExecutableReference>();
+        ConcurrentDictionary<string, byte[]> assemblyImageCache = new ConcurrentDictionary<string, byte[]>();
 
         /// <summary>
         /// Clears the assembly cache.
@@ -111,6 +120,17 @@ namespace SecretNest.CSharpRoslynAgency
         public void ClearAssemblyCache()
         {
             metadataReferenceCache.Clear();
+            assemblyImageCache.Clear();
+        }
+
+        /// <summary>
+        /// Load image into assembly cache.
+        /// </summary>
+        /// <param name="fullName">Full name of the assembly / module.</param>
+        /// <param name="image">PE format image of the assembly / module.</param>
+        public void LoadIntoAssemblyCache(string fullName, byte[] image)
+        {
+            assemblyImageCache[fullName] = image;
         }
 
         /// <summary>

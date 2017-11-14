@@ -15,6 +15,7 @@ NetStandard 2 and NetFX 4.6 are supported.</Description>
     <PackageProjectUrl>https://github.com/scegg/CSharpRoslynAgency/</PackageProjectUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Version>1.1.0</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)' == 'net46'">
