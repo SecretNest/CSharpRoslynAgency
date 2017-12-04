@@ -72,11 +72,12 @@ namespace SecretNest.CSharpRoslynAgency
                 handler(this, e);
                 if (e.MissingAssemblyImage != null)
                 {
+                    LoadIntoAssemblyCache(fullName, e.MissingAssemblyImage);
                     var result = assemblyReference.BuildPortableExecutableReference(e.MissingAssemblyImage);
 #if DEBUG
                     Console.WriteLine("Got Assembly: " + fullName);
 #endif
-                    metadataReferenceCache[fullName] = result;
+                    //metadataReferenceCache[fullName] = result;
                     return result;
                 }
             }
@@ -93,25 +94,25 @@ namespace SecretNest.CSharpRoslynAgency
                 return beforeCache;
             }
 
-            if (metadataReferenceCache.TryGetValue(fullName, out var match))
-            {
-#if DEBUG
-                Console.WriteLine("Got Assembly From Cache: " + fullName);
-#endif
-                return match;
-            }
+//            if (metadataReferenceCache.TryGetValue(fullName, out var match))
+//            {
+//#if DEBUG
+//                Console.WriteLine("Got Assembly From Cache: " + fullName);
+//#endif
+//                return match;
+//            }
 
             if (assemblyImageCache.TryGetValue(fullName, out var image))
             {
                 var result = assemblyReference.BuildPortableExecutableReference(image);
-                metadataReferenceCache[fullName] = result;
+                //metadataReferenceCache[fullName] = result;
                 return result;
             }
 
             return GetFromEvent(MissingAssemblyResolving, display, fullName, assemblyReference);
         }
 
-        ConcurrentDictionary<string, PortableExecutableReference> metadataReferenceCache = new ConcurrentDictionary<string, PortableExecutableReference>();
+        //ConcurrentDictionary<string, PortableExecutableReference> metadataReferenceCache = new ConcurrentDictionary<string, PortableExecutableReference>();
         ConcurrentDictionary<string, byte[]> assemblyImageCache = new ConcurrentDictionary<string, byte[]>();
 
         /// <summary>
@@ -119,7 +120,7 @@ namespace SecretNest.CSharpRoslynAgency
         /// </summary>
         public void ClearAssemblyCache()
         {
-            metadataReferenceCache.Clear();
+            //metadataReferenceCache.Clear();
             assemblyImageCache.Clear();
         }
 
