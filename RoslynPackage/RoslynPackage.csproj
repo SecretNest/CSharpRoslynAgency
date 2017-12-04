@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net46;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>net46;netstandard2.0;netcoreapp20</TargetFrameworks>
     <PackageId>SecretNest.CSharpRoslynAgency</PackageId>
     <RootNamespace>SecretNest.RoslynAgency</RootNamespace>
     <AssemblyName>RoslynAgency</AssemblyName>
@@ -9,13 +9,13 @@
     <Company>SecretNest.info</Company>
     <Product>RoslynAgency</Product>
     <Description>An encapsulated package for building assembly using Roslyn and C#.
-NetStandard 2 and NetFX 4.6 are supported.</Description>
+NetStandard 2, NetCore 2 and NetFx 4.6 are supported.</Description>
     <Copyright>Allen Cui</Copyright>
     <PackageLicenseUrl>https://github.com/scegg/CSharpRoslynAgency/blob/master/MIT.LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/scegg/CSharpRoslynAgency/</PackageProjectUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <Version>1.1.0</Version>
+    <Version>1.1.1</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)' == 'net46'">
