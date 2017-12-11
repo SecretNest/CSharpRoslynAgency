@@ -112,8 +112,7 @@ namespace SecretNest.CSharpRoslynAgency
             return GetFromEvent(MissingAssemblyResolving, display, fullName, assemblyReference);
         }
 
-        //ConcurrentDictionary<string, PortableExecutableReference> metadataReferenceCache = new ConcurrentDictionary<string, PortableExecutableReference>();
-        ConcurrentDictionary<string, byte[]> assemblyImageCache = new ConcurrentDictionary<string, byte[]>();
+        Dictionary<string, byte[]> assemblyImageCache = new Dictionary<string, byte[]>();
 
         /// <summary>
         /// Clears the assembly cache.
@@ -125,24 +124,53 @@ namespace SecretNest.CSharpRoslynAgency
         }
 
         /// <summary>
-        /// Load image into assembly cache.
+        /// Loads image into assembly cache.
         /// </summary>
-        /// <param name="fullName">Full name of the assembly / module.</param>
-        /// <param name="image">PE format image of the assembly / module.</param>
+        /// <param name="fullName">Full name of the assembly / module</param>
+        /// <param name="image">PE format image of the assembly / module</param>
         public void LoadIntoAssemblyCache(string fullName, byte[] image)
         {
             assemblyImageCache[fullName] = image;
         }
 
         /// <summary>
+        /// Returns names of all cached assemblies and modules.
+        /// </summary>
+        /// <returns>Names of all cached assemblies and modules</returns>
+        public IEnumerable<string> GetAllCachedAssemblyNames()
+        {
+            return assemblyImageCache.Keys;
+        }
+
+        /// <summary>
+        /// Removes an cached assembly / module.
+        /// </summary>
+        /// <param name="fullName">Full name of the assembly / module</param>
+        /// <returns>Whether the element is successfully found and removed.</returns>
+        public bool RemoveFromAssemblyCache(string fullName)
+        {
+            return assemblyImageCache.Remove(fullName);
+        }
+
+        /// <summary>
+        /// Checks whether the assembly / module specified is cached.
+        /// </summary>
+        /// <param name="fullName">Full name of the assembly / module</param>
+        /// <returns>Whether the assembly / module specified is cached.</returns>
+        public bool CheckExistedInAssemblyCache(string fullName)
+        {
+            return assemblyImageCache.ContainsKey(fullName);
+        }
+
+        /// <summary>
         /// Builds source code.
         /// </summary>
-        /// <param name="assemblyName">Name of the creating assembly.</param>
+        /// <param name="assemblyName">Name of the creating assembly</param>
         /// <param name="sourceCode">Source code. Each element represents a source code file.</param>
-        /// <param name="references">Assembly references for building this assembly.</param>
-        /// <param name="assemblyImage">Image of the created assembly.</param>
-        /// <param name="errors">Building errors.</param>
-        /// <returns>Whether the building procedure is succeeded.</returns>
+        /// <param name="references">Assembly references for building this assembly</param>
+        /// <param name="assemblyImage">Image of the created assembly</param>
+        /// <param name="errors">Building errors</param>
+        /// <returns>Whether the building procedure is succeeded</returns>
         public bool Build(string assemblyName, IEnumerable<string> sourceCode, IEnumerable<AssemblyReference> references, out byte[] assemblyImage, out BuildingError[] errors)
         {
             List<SyntaxTree> syntaxTrees = new List<SyntaxTree>();

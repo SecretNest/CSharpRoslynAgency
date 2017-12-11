@@ -15,8 +15,10 @@ NetStandard 2, NetCore 2 and NetFx 4.6 are supported.</Description>
     <PackageProjectUrl>https://github.com/scegg/CSharpRoslynAgency/</PackageProjectUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <Version>1.2</Version>
-    <PackageReleaseNotes>Fix an issue related to cached assembly with different alias.</PackageReleaseNotes>
+    <Version>1.3</Version>
+    <PackageReleaseNotes>Adds multiple methods for cache operating.</PackageReleaseNotes>
+    <AssemblyVersion>1.3.0.0</AssemblyVersion>
+    <FileVersion>1.3.0.0</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)' == 'net46'">
