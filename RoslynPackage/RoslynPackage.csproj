@@ -28,6 +28,7 @@ Due to the Roslyn limitation, NetFx 4.6 is not supported in this version. For Ne
 
   <PropertyGroup>
     <DocumentationFile>RoslynAgency.xml</DocumentationFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <!--<PropertyGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
