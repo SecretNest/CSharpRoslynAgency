@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net46;netstandard2.0;netcoreapp20</TargetFrameworks>
+    <TargetFrameworks>net461;netstandard2.0;netcoreapp20</TargetFrameworks>
     <PackageId>SecretNest.CSharpRoslynAgency</PackageId>
     <RootNamespace>SecretNest.RoslynAgency</RootNamespace>
     <AssemblyName>RoslynAgency</AssemblyName>
@@ -9,19 +9,19 @@
     <Company>SecretNest.info</Company>
     <Product>RoslynAgency</Product>
     <Description>An encapsulated package for building assembly using Roslyn and C#.
-NetStandard 2, NetCore 2 and NetFx 4.6 are supported.</Description>
+NetStandard 2, NetCore 2 and NetFx 4.6.1 are supported.</Description>
     <Copyright>Allen Cui</Copyright>
     <PackageLicenseUrl>https://github.com/scegg/CSharpRoslynAgency/blob/master/MIT.LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/scegg/CSharpRoslynAgency/</PackageProjectUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <Version>1.3</Version>
-    <PackageReleaseNotes>Adds multiple methods for cache operating.</PackageReleaseNotes>
-    <AssemblyVersion>1.3.0.0</AssemblyVersion>
-    <FileVersion>1.3.0.0</FileVersion>
+    <Version>1.3.1</Version>
+    <PackageReleaseNotes>Updates the reference of Roslyn to the current latest.</PackageReleaseNotes>
+    <AssemblyVersion>1.3.1.0</AssemblyVersion>
+    <FileVersion>1.3.1.0</FileVersion>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(TargetFramework)' == 'net46'">
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net461'">
     <!--<DefineConstants>netfx</DefineConstants>-->
     <AssemblySearchPaths>$(AssemblySearchPaths);{GAC}</AssemblySearchPaths>
   </PropertyGroup>
@@ -31,7 +31,7 @@ NetStandard 2, NetCore 2 and NetFx 4.6 are supported.</Description>
   </PropertyGroup>-->
       
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="2.4.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.1.0" />
   </ItemGroup>
 
 </Project>
