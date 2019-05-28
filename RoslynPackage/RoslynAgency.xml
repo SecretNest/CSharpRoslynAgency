@@ -1,0 +1,175 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RoslynAgency</name>
+    </assembly>
+    <members>
+        <member name="T:SecretNest.CSharpRoslynAgency.AssemblyReference">
+            <summary>
+            Represents an assembly for building code using Roslyn.
+            </summary>
+        </member>
+        <member name="P:SecretNest.CSharpRoslynAgency.AssemblyReference.Name">
+            <summary>
+            Gets the name of the assembly / module.
+            </summary>
+        </member>
+        <member name="P:SecretNest.CSharpRoslynAgency.AssemblyReference.IsModule">
+            <summary>
+            Gets whether this is a module.
+            </summary>
+        </member>
+        <member name="P:SecretNest.CSharpRoslynAgency.AssemblyReference.EmbedInteropTypes">
+            <summary>
+            Gets whether this assembly / module is EmbedInteropTypes.
+            </summary>
+        </member>
+        <member name="P:SecretNest.CSharpRoslynAgency.AssemblyReference.Aliases">
+            <summary>
+            Gets the aliases of the assembly / module.
+            </summary>
+        </member>
+        <member name="M:SecretNest.CSharpRoslynAgency.AssemblyReference.#ctor(System.Reflection.AssemblyName,System.Boolean,System.Boolean,System.String[])">
+            <summary>
+            Initializes an instance of the AssemblyReference.
+            </summary>
+            <param name="name">Name of the assembly / module.</param>
+            <param name="isModule">Whether this is a module.</param>
+            <param name="embedInteropTypes">Whether this assembly / module is EmbedInteropTypes.</param>
+            <param name="aliases">Aliases of the assembly / module.</param>
+        </member>
+        <member name="T:SecretNest.CSharpRoslynAgency.Builder">
+            <summary>
+            Contains the builder for building C# code using Roslyn.
+            </summary>
+        </member>
+        <member name="M:SecretNest.CSharpRoslynAgency.Builder.#ctor">
+            <summary>
+            Initializes an instance of the Builder.
+            </summary>
+        </member>
+        <member name="E:SecretNest.CSharpRoslynAgency.Builder.MissingAssemblyResolving">
+            <summary>
+            Occurs when a missing assembly / module needs to be resolved. Property MissingAssemblyImage in parameter e should be set before returning if the assembly / module is resolved.
+            </summary>
+        </member>
+        <member name="E:SecretNest.CSharpRoslynAgency.Builder.MissingAssemblyResolvingBeforeCache">
+            <summary>
+            Occurs when a missing assembly / module needs to be resolved before querying from cache. Property MissingAssemblyImage in parameter e should be set before returning if the assembly / module is resolved.
+            </summary>
+        </member>
+        <member name="M:SecretNest.CSharpRoslynAgency.Builder.ClearAssemblyCache">
+            <summary>
+            Clears the assembly cache.
+            </summary>
+        </member>
+        <member name="M:SecretNest.CSharpRoslynAgency.Builder.LoadIntoAssemblyCache(System.String,System.Byte[])">
+            <summary>
+            Loads image into assembly cache.
+            </summary>
+            <param name="fullName">Full name of the assembly / module</param>
+            <param name="image">PE format image of the assembly / module</param>
+        </member>
+        <member name="M:SecretNest.CSharpRoslynAgency.Builder.GetAllCachedAssemblyNames">
+            <summary>
+            Returns names of all cached assemblies and modules.
+            </summary>
+            <returns>Names of all cached assemblies and modules</returns>
+        </member>
+        <member name="M:SecretNest.CSharpRoslynAgency.Builder.RemoveFromAssemblyCache(System.String)">
+            <summary>
+            Removes an cached assembly / module.
+            </summary>
+            <param name="fullName">Full name of the assembly / module</param>
+            <returns>Whether the element is successfully found and removed.</returns>
+        </member>
+        <member name="M:SecretNest.CSharpRoslynAgency.Builder.CheckExistedInAssemblyCache(System.String)">
+            <summary>
+            Checks whether the assembly / module specified is cached.
+            </summary>
+            <param name="fullName">Full name of the assembly / module</param>
+            <returns>Whether the assembly / module specified is cached.</returns>
+        </member>
+        <member name="M:SecretNest.CSharpRoslynAgency.Builder.Build(System.String,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{SecretNest.CSharpRoslynAgency.AssemblyReference},System.Byte[]@,SecretNest.CSharpRoslynAgency.BuildingError[]@)">
+            <summary>
+            Builds source code.
+            </summary>
+            <param name="assemblyName">Name of the creating assembly</param>
+            <param name="sourceCode">Source code. Each element represents a source code file.</param>
+            <param name="references">Assembly references for building this assembly</param>
+            <param name="assemblyImage">Image of the created assembly</param>
+            <param name="errors">Building errors</param>
+            <returns>Whether the building procedure is succeeded</returns>
+        </member>
+        <member name="T:SecretNest.CSharpRoslynAgency.BuildingError">
+            <summary>
+            Represents an error in building code.
+            </summary>
+        </member>
+        <member name="P:SecretNest.CSharpRoslynAgency.BuildingError.Id">
+            <summary>
+            Gets the diagnostic identifier. For diagnostics generated by the compiler, this will be a numeric code with a prefix such as "CS1001".
+            </summary>
+        </member>
+        <member name="P:SecretNest.CSharpRoslynAgency.BuildingError.Message">
+            <summary>
+            Gets the error message.
+            </summary>
+        </member>
+        <member name="P:SecretNest.CSharpRoslynAgency.BuildingError.Location">
+            <summary>
+            Gets the program location in source code.
+            </summary>
+        </member>
+        <member name="M:SecretNest.CSharpRoslynAgency.BuildingError.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Initializes an instance of the BuildingError.
+            </summary>
+            <param name="id">Diagnostic identifier.</param>
+            <param name="message">Error message.</param>
+            <param name="location">Program location in source code.</param>
+        </member>
+        <member name="T:SecretNest.CSharpRoslynAgency.MissingAssemblyResolvingEventArgs">
+            <summary>
+            Represents an argument of the MissingAssemblyResolving.
+            </summary>
+        </member>
+        <member name="P:SecretNest.CSharpRoslynAgency.MissingAssemblyResolvingEventArgs.Display">
+            <summary>
+            Gets the path or name of the assembly / module which reference this missing assembly
+            </summary>
+        </member>
+        <member name="P:SecretNest.CSharpRoslynAgency.MissingAssemblyResolvingEventArgs.IsModule">
+            <summary>
+            Gets whether the assembly / module which reference this missing assembly is a module.
+            </summary>
+        </member>
+        <member name="P:SecretNest.CSharpRoslynAgency.MissingAssemblyResolvingEventArgs.EmbedInteropTypes">
+            <summary>
+            Gets whether the assembly / module which reference this missing assembly is EmbedInteropTypes.
+            </summary>
+        </member>
+        <member name="P:SecretNest.CSharpRoslynAgency.MissingAssemblyResolvingEventArgs.Aliases">
+            <summary>
+            Gets the aliases of the assembly / module which reference this missing assembly.
+            </summary>
+        </member>
+        <member name="P:SecretNest.CSharpRoslynAgency.MissingAssemblyResolvingEventArgs.MissingAssemblyImage">
+            <summary>
+            Gets or sets the image of the missing assembly / module.
+            </summary>
+        </member>
+        <member name="P:SecretNest.CSharpRoslynAgency.MissingAssemblyResolvingEventArgs.AssemblyName">
+            <summary>
+            Gets the name of the assembly / module which is missing.
+            </summary>
+        </member>
+        <member name="M:SecretNest.CSharpRoslynAgency.MissingAssemblyResolvingEventArgs.#ctor(System.String,SecretNest.CSharpRoslynAgency.AssemblyReference)">
+            <summary>
+            Initializes an instance of the MissingAssemblyResolvingEventArgs.
+            </summary>
+            <param name="display">Path or name of the assembly / module which reference this missing assembly</param>
+            <param name="reference">Instance of AssemblyReference referring to the missing assembly.</param>
+        </member>
+    </members>
+</doc>

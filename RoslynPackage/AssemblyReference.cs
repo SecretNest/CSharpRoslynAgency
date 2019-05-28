@@ -39,11 +39,10 @@ namespace SecretNest.CSharpRoslynAgency
         /// Initializes an instance of the AssemblyReference.
         /// </summary>
         /// <param name="name">Name of the assembly / module.</param>
-        ///// <param name="image">Image of the assembly / module in PE format.</param>
         /// <param name="isModule">Whether this is a module.</param>
         /// <param name="embedInteropTypes">Whether this assembly / module is EmbedInteropTypes.</param>
         /// <param name="aliases">Aliases of the assembly / module.</param>
-        public AssemblyReference(AssemblyName name, /*byte[] image, */bool isModule = false, bool embedInteropTypes = false, params string[] aliases)
+        public AssemblyReference(AssemblyName name, bool isModule = false, bool embedInteropTypes = false, params string[] aliases)
         {
             Name = name;
             //Image = image;

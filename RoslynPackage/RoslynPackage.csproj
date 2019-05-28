@@ -9,9 +9,9 @@
     <Company>SecretNest.info</Company>
     <Product>RoslynAgency</Product>
     <Description>An encapsulated package for building assembly using Roslyn and C#.
-NetStandard 2, NetCore 2 and NetFx 4.6.1 are supported.</Description>
+NetStandard 2, NetCore 2 and NetFx 4.6.1 are supported.
+Due to the Roslyn limitation, NetFx 4.6 is not supported in this version. For NetFx 4.6 user, version 1.3.0 of this package is the latest.</Description>
     <Copyright>Allen Cui</Copyright>
-    <PackageLicenseUrl>https://github.com/scegg/CSharpRoslynAgency/blob/master/MIT.LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/scegg/CSharpRoslynAgency/</PackageProjectUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
@@ -24,6 +24,10 @@ NetStandard 2, NetCore 2 and NetFx 4.6.1 are supported.</Description>
   <PropertyGroup Condition="'$(TargetFramework)' == 'net461'">
     <!--<DefineConstants>netfx</DefineConstants>-->
     <AssemblySearchPaths>$(AssemblySearchPaths);{GAC}</AssemblySearchPaths>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <DocumentationFile>RoslynAgency.xml</DocumentationFile>
   </PropertyGroup>
 
   <!--<PropertyGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
