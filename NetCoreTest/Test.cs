@@ -48,78 +48,19 @@ namespace UserCode
         public Test()
         {
             builder.MissingAssemblyResolving += Builder_MissingAssemblyResolving;
-            foreach (var file in locationsOfAllReferences)
+            foreach (var assemblyFilePath in locationsOfAllReferences)
             {
-                var name = System.Runtime.Loader.AssemblyLoadContext.GetAssemblyName(file);
+                var name = AssemblyName.GetAssemblyName(assemblyFilePath);
                 var lazy = new Lazy<byte[]>(() =>
                 {
-                    var result = File.ReadAllBytes(file);
-                    Console.WriteLine("Loaded file: " + file);
+                    var result = File.ReadAllBytes(assemblyFilePath);
+                    Console.WriteLine("Loaded file: " + assemblyFilePath);
                     return result;
                 }, false);
                 platformAssembliesFullName.Add(name.FullName, lazy);
                 platformAssembliesName.Add(name.Name, lazy);
             }
         }
-
-        //public void AutoTest()
-        //{
-        //    var names = platformAssembliesFullName.Keys.ToArray();
-        //    bool[] skipped = new bool[names.Length];
-
-        //    for (int i = 0; i < skipped.Length; i++)
-        //    {
-        //        skipped[i] = true;
-        //        if (!TestOne(skipped, names))
-        //        {
-        //            skipped[i] = false;
-        //        }
-        //    }
-
-        //    Console.WriteLine();
-        //    Console.WriteLine();
-        //    Console.WriteLine("Required:");
-        //    for (int i = 0; i < skipped.Length; i++)
-        //    {
-        //        if (!skipped[i])
-        //            Console.WriteLine(names[i]);
-        //    }
-        //    Console.Read();
-        //}
-
-        //public bool TestOne(bool[] skipped, string[] names)
-        //{
-        //    List<AssemblyReference> references = new List<AssemblyReference>();
-        //    for (int i = 0; i < skipped.Length; i++)
-        //    {
-        //        if (!skipped[i]) references.Add(new AssemblyReference(new AssemblyName(names[i])));
-        //    }
-
-        //    if (builder.Build("TestAssembly" + Guid.NewGuid().ToString("N"), new string[] { code }, references, out var assemblyImage, out var errors))
-        //    {
-        //        Assembly generated = null;
-        //        using (MemoryStream stream = new MemoryStream(assemblyImage))
-        //        {
-        //            stream.Seek(0, SeekOrigin.Begin);
-        //            generated = System.Runtime.Loader.AssemblyLoadContext.Default.LoadFromStream(stream);
-        //        }
-
-        //        Type type = generated.GetType("UserCode.UserCodeClass");
-
-        //        object obj = Activator.CreateInstance(type);
-        //        MethodInfo method = type.GetTypeInfo().GetDeclaredMethod("Check");
-        //        var check = (bool)method.Invoke(obj, new object[] { "pass" });
-        //        if (check != true)
-        //        {
-        //            return false;
-        //        }
-        //        return true;
-        //    }
-        //    else
-        //    {
-        //        return false;
-        //    }
-        //}
 
         public void Run()
         {
@@ -133,12 +74,7 @@ namespace UserCode
 
             if (builder.Build("TestAssembly", new string[] { code }, references, out var assemblyImage, out var errors))
             {
-                Assembly generated = null;
-                using (MemoryStream stream = new MemoryStream(assemblyImage))
-                {
-                    stream.Seek(0, SeekOrigin.Begin);
-                    generated = System.Runtime.Loader.AssemblyLoadContext.Default.LoadFromStream(stream);
-                }
+                Assembly generated = Assembly.Load(assemblyImage);
 
                 Type type = generated.GetType("UserCode.UserCodeClass");
 
