@@ -9,16 +9,16 @@
     <Company>SecretNest.info</Company>
     <Product>RoslynAgency</Product>
     <Description>An encapsulated package for building assembly using Roslyn and C#.
-NetStandard 2 &amp; 2.1, NetCore 2 &amp; 3 and NetFx 4.6.1 are supported. C# 8 is supported.
+NetStandard 2 &amp; 2.1, NetCore 2.1 &amp; 3.1 and NetFx 4.6.1 are supported. C# 8 is supported.
 Due to the Roslyn limitation, NetFx 4.6 is not supported in this version. For NetFx 4.6 user, version 1.3.0 of this package is the latest.</Description>
     <Copyright>Allen Cui</Copyright>
     <PackageProjectUrl>https://github.com/scegg/CSharpRoslynAgency/</PackageProjectUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <Version>1.3.2</Version>
-    <PackageReleaseNotes>Updates the reference of Roslyn to the current latest 3.3.1. C# 8 and NetCore 3 are supported.</PackageReleaseNotes>
-    <AssemblyVersion>1.3.2.0</AssemblyVersion>
-    <FileVersion>1.3.2.0</FileVersion>
+    <Version>1.3.3</Version>
+    <PackageReleaseNotes>Updates the reference of Roslyn to the current latest 3.5.0. Rebuild on dotnet core 2.1 LTS and 3.1 LTS.</PackageReleaseNotes>
+    <AssemblyVersion>1.3.3.0</AssemblyVersion>
+    <FileVersion>1.3.3.0</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)' == 'net461'">
@@ -36,7 +36,7 @@ Due to the Roslyn limitation, NetFx 4.6 is not supported in this version. For Ne
   </PropertyGroup>-->
       
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.3.1" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.5.0" />
   </ItemGroup>
 
 </Project>
