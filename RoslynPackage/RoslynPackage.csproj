@@ -12,7 +12,7 @@
 NetStandard 2 &amp; 2.1, NetCore 2.1 &amp; 3.1 and NetFx 4.6.1 are supported. C# 8 is supported.
 Due to the Roslyn limitation, NetFx 4.6 is not supported in this version. For NetFx 4.6 user, version 1.3.0 of this package is the latest.</Description>
     <Copyright>Allen Cui</Copyright>
-    <PackageProjectUrl>https://github.com/scegg/CSharpRoslynAgency/</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/SecretNest/CSharpRoslynAgency/</PackageProjectUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <Version>1.3.3</Version>
